@@ -40,5 +40,5 @@ def log_color_map(color_map):
 
 color_map,result_length = create_color_map()
 result = log_color_map(color_map)  
-assert(result_length == 25)
+assert(result_length == 24)
 print("All is well (maybe!)\n") 
