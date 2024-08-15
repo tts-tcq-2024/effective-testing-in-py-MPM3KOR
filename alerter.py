@@ -7,9 +7,18 @@ def network_alert_stub(celcius):
     # stub always succeeds and returns 200
     return 200
 
-def alert_in_celcius(farenheit):
+
+def network_alert(celcius):
+    network_alert_stub(celcius)
+    return 300
+    
+def celcius_conversion(farenheit):
     celcius = (farenheit - 32) * 5 / 9
-    returnCode = network_alert_stub(celcius)
+    return celcius
+
+def alert_in_celcius(farenheit):
+    celcius = celcius_conversion(farenheit)
+    returnCode = network_alert(celcius)
     if returnCode != 200:
         # non-ok response is not an error! Issues happen in life!
         # let us keep a count of failures to report
@@ -19,7 +28,22 @@ def alert_in_celcius(farenheit):
         alert_failure_count += 0
 
 
-alert_in_celcius(400.5)
-alert_in_celcius(303.6)
+
+# Test Environment
+def test_cases_alert_count_failure(count):
+     assert(alert_failure_count == count)
+    
+def test_case_celcius_conversion(farenheit, test_celcius):
+    assert(celcius_conversion(farenheit) == test_celcius)
+
+alert_in_celcius(200)
+alert_in_celcius(500)
+alert_in_celcius(300)
+test_cases_alert_count_failure(0)
+test_cases_alert_count_failure(1)
+test_cases_alert_count_failure(2)
+test_case_celcius_conversion(200, 93.33333333333333)
+test_case_celcius_conversion(500, 260.0)
+test_case_celcius_conversion(300, 149)
 print(f'{alert_failure_count} alerts failed.')
 print('All is well (maybe!)')
